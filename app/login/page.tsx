@@ -1,7 +1,11 @@
+"use client"
+
+import { signInWithGoogle } from "@/lib/supabase";
+
 export default function page() {
   return (
     <div>
-        <button type="button">Sign in</button>
+        <button onClick={signInWithGoogle} type="button">Sign in</button>
     </div>
   )
 }
