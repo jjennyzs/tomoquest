@@ -55,7 +55,8 @@ export default function DashboardPage() {
         <GameProvider>
             <div className="flex items-center justify-center flex-col p-12 gap-8">
                 <div className="p-4 bg-white rounded-lg relative">
-                    <QRCodeSVG value={`http:/localhost:3000/dashboard?friend=${user?.id}`}
+                    {/* <QRCodeSVG value={`http://localhost:3000/dashboard?friend=${user?.id}`} */}
+                    <QRCodeSVG value={`https://interplacental-marcelene-superchivalrously.ngrok-free.dev/dashboard?friend=${user?.id}`}
                         size={250}
                         bgColor="#ffffff"
                         fgColor="#444444"
