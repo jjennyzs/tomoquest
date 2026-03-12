@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
     const missing = [
@@ -11,15 +11,26 @@ if (!supabaseUrl || !supabaseKey) {
 
     throw new Error(
         `Supabase env missing: ${missing.join(", ")}. ` +
-            `In Next.js, client-side env vars must be prefixed with NEXT_PUBLIC_.`,
+        `In Next.js, client-side env vars must be prefixed with NEXT_PUBLIC_.`,
     );
 }
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
+function getURL() {
+    if (typeof window !== "undefined") {
+        return `${window.location.protocol}//${window.location.host}`;
+    }
+
+    let url = process.env.NEXT_PUBLIC_SITE_URL ??
+        process.env.NEXT_PUBLIC_VERCEL_URL ??
+        "http://localhost:3000";
+    url = url.includes("http") ? url : `https://${url}`;
+}
+
 export const signInWithGoogle = async (
 ) => {
-    const redirectTo = `/`;
+    const redirectTo = getURL();
 
     const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
