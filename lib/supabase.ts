@@ -26,6 +26,7 @@ function getURL() {
         process.env.NEXT_PUBLIC_VERCEL_URL ??
         "http://localhost:3000";
     url = url.includes("http") ? url : `https://${url}`;
+    return url;
 }
 
 export const signInWithGoogle = async (

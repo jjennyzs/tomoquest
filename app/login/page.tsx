@@ -1,11 +1,18 @@
-'use client'
+'use client';
 
+import useAuth from '@/hooks/useAuth';
 import { signInWithGoogle } from '@/lib/supabase';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LoginPage() {
+  const { user } = useAuth();
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
+      <div className='text-white'>
+        hello {user?.id}
+      </div>
+      <Link href={'/dashboard'} className='text-white'>Go to dashboard</Link>
       <div className="bg-gray-800 text-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">
         <div className="flex justify-center mb-6">
           <Image src={'/tomoquest_logo.svg'} alt='Tomo quest logo' width={100} height={100} />
